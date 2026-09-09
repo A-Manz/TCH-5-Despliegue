@@ -2,10 +2,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-# Las tres listas siguientes se generaron desde el dataset de entrenamiento.
-# Si se reentrena el modelo con datos nuevos, hay que regenerarlas con:
-#     for valor in sorted(df["barrio"].unique()):
-#         print('    "' + valor + '",')
+PLANTAS_STR = ["BAJO", "ENTREPLANTA", "NO_APLICA", "DESCONOCIDO"]
 
 ZONAS = Literal[
     "arganzuela",
@@ -195,7 +192,7 @@ class Vivienda(BaseModel):
     zona: str = Field(description="Zona de Madrid")
     barrio: str = Field(description="Barrio")
     tipo_inmueble: str = Field(description="Tipo de inmueble")
-    planta: str = Field(description="Planta: un número o BAJO / ENTREPLANTA")
+    planta: str = Field(description=f"Planta: un número o {PLANTAS_STR}")
     ascensor: Literal["S", "N", "NO_APLICA", "DESCONOCIDO"]
     localizacion: Literal["EXTERIOR", "INTERIOR", "NO_APLICA", "DESCONOCIDO"]
 
