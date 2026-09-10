@@ -28,3 +28,17 @@ def predict(vivienda: Vivienda):
     X = X.reindex(columns=model.COLUMNS, fill_value=0)
     prediccion = int(model.model.predict(X)[0])
     return Prediccion(precio_estimado=prediccion)
+
+
+
+### Endpoint de testeo para pedir los valores de las columnas categóricas
+
+# @app.get("/categoricas")
+# def categoricas():
+#     """Devuelve los valores de las columnas categóricas"""
+#     return {
+#         "zonas": list(ZONAS.__args__),
+#         "tipos_inmueble": list(TIPOS_INMUEBLE.__args__),
+#         "plantas": list(PLANTAS.__args__),
+#         "barrios": list(BARRIOS.__args__),
+#     }

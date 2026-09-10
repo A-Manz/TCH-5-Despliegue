@@ -209,82 +209,77 @@ class Vivienda(BaseModel):
     """DATOS DE ENTRADA."""
 
     metros: float = Field(gt=0, description="Superficie en metros cuadrados")
-    habitaciones: int = Field(ge=0, description="Número de habitaciones")
-    banos: int = Field(ge=0, description="Número de baños")
-    zona: str = Field(description="Zona de Madrid")
-    barrio: str = Field(description="Barrio")
-    tipo_inmueble: str = Field(description="Tipo de inmueble")
-    planta: str = Field(description="Planta de la vivienda")
-    ascensor: Literal["S", "N", "NO_APLICA", "DESCONOCIDO"]
-    localizacion: Literal["EXTERIOR", "INTERIOR", "NO_APLICA", "DESCONOCIDO"]
+    habitaciones_limpio: int = Field(ge=0, description="Número de habitaciones")
+    baños_limpio: int = Field(ge=0, description="Número de baños")
+    zona: ZONAS
+    barrio: BARRIOS
+    tipo_inmueble: TIPOS_INMUEBLE
+    planta_limpio: PLANTAS
+    ascensor_limpio: Literal["S", "N", "NO_APLICA", "DESCONOCIDO"]
+    localizacion_limpio: Literal["EXTERIOR", "INTERIOR", "NO_APLICA", "DESCONOCIDO"]
 
-    terraza: bool = False
-    garaje: bool = False
-    jardin: bool = False
-    amueblada: bool = False
-    reformado: bool = False
-
-    flag_rebaja: Literal[0,1]
-    flag_loft: Literal[0,1]
-    flag_nuda_propiedad: Literal[0,1]
-    flag_proindiviso: Literal[0,1]
-    flag_subasta: Literal[0,1]
-    flag_okupada: Literal[0,1]
-    flag_alquilada: Literal[0,1]
-    tag_piso: Literal[0,1]
-    tag_vivienda: Literal[0,1]
-    tag_exterior: Literal[0,1]
-    tag_metro: Literal[0,1]
-    tag_amplio: Literal[0,1]
-    tag_terraza: Literal[0,1]
-    tag_reformado: Literal[0,1]
-    tag_oportunidad: Literal[0,1]
-    tag_exclusiva: Literal[0,1]
-    tag_luminoso: Literal[0,1]
-    tag_hogar: Literal[0,1]
-    tag_espectacular: Literal[0,1]
-    tag_inmobiliaria: Literal[0,1]
-    tag_ático: Literal[0,1]
-    tag_finca: Literal[0,1]
-    tag_lujo: Literal[0,1]
-    tag_vistas: Literal[0,1]
-    tag_nuevo: Literal[0,1]
-    tag_exclusivo: Literal[0,1]
-    tag_reformada: Literal[0,1]
-    tag_equipada: Literal[0,1]
-    tag_casa: Literal[0,1]
-    tag_parque: Literal[0,1]
-    tag_garaje: Literal[0,1]
-    tag_interior: Literal[0,1]
-    tag_estrenar: Literal[0,1]
-    tag_piscina: Literal[0,1]
-    tag_funcional: Literal[0,1]
-    tag_hall: Literal[0,1]
-    tag_moderno: Literal[0,1]
-    tag_apartamento: Literal[0,1]
-    tag_suite: Literal[0,1]
-    tag_prestigioso: Literal[0,1]
-    tag_elegante: Literal[0,1]
-    tag_impresionante: Literal[0,1]
-    tag_estudio: Literal[0,1]
-    tag_amueblada: Literal[0,1]
-    tag_urbanización: Literal[0,1]
-    tag_calefacción: Literal[0,1]
-    tag_armarios: Literal[0,1]
-    tag_reformar: Literal[0,1]
-    tag_patio: Literal[0,1]
-    tag_jardín: Literal[0,1]
-    tag_chalet: Literal[0,1]
-    tag_balcones: Literal[0,1]
-    tag_dúplex: Literal[0,1]
-    tag_portero: Literal[0,1]
-    tag_electrodomésticos: Literal[0,1]
-    tag_goya: Literal[0,1]
-    tag_solo_particulares: Literal[0,1]
-    tag_ventanales: Literal[0,1]
-    tag_parcela: Literal[0,1]
-    tag_abstenerse_agencias: Literal[0,1]
-    tag_seguridad: Literal[0,1]
+    # Las flags opcionales
+    flag_rebaja: Literal[0, 1] = 0
+    flag_loft: Literal[0, 1] = 0
+    flag_nuda_propiedad: Literal[0, 1] = 0
+    flag_proindiviso: Literal[0, 1] = 0
+    flag_subasta: Literal[0, 1] = 0
+    flag_okupada: Literal[0, 1] = 0
+    flag_alquilada: Literal[0, 1] = 0
+    tag_piso: Literal[0, 1] = 0
+    tag_vivienda: Literal[0, 1] = 0
+    tag_exterior: Literal[0, 1] = 0
+    tag_metro: Literal[0, 1] = 0
+    tag_amplio: Literal[0, 1] = 0
+    tag_terraza: Literal[0, 1] = 0
+    tag_reformado: Literal[0, 1] = 0
+    tag_oportunidad: Literal[0, 1] = 0
+    tag_exclusiva: Literal[0, 1] = 0
+    tag_luminoso: Literal[0, 1] = 0
+    tag_hogar: Literal[0, 1] = 0
+    tag_espectacular: Literal[0, 1] = 0
+    tag_inmobiliaria: Literal[0, 1] = 0
+    tag_ático: Literal[0, 1] = 0
+    tag_finca: Literal[0, 1] = 0
+    tag_lujo: Literal[0, 1] = 0
+    tag_vistas: Literal[0, 1] = 0
+    tag_nuevo: Literal[0, 1] = 0
+    tag_exclusivo: Literal[0, 1] = 0
+    tag_reformada: Literal[0, 1] = 0
+    tag_equipada: Literal[0, 1] = 0
+    tag_casa: Literal[0, 1] = 0
+    tag_parque: Literal[0, 1] = 0
+    tag_garaje: Literal[0, 1] = 0
+    tag_interior: Literal[0, 1] = 0
+    tag_estrenar: Literal[0, 1] = 0
+    tag_piscina: Literal[0, 1] = 0
+    tag_funcional: Literal[0, 1] = 0
+    tag_hall: Literal[0, 1] = 0
+    tag_moderno: Literal[0, 1] = 0
+    tag_apartamento: Literal[0, 1] = 0
+    tag_suite: Literal[0, 1] = 0
+    tag_prestigioso: Literal[0, 1] = 0
+    tag_elegante: Literal[0, 1] = 0
+    tag_impresionante: Literal[0, 1] = 0
+    tag_estudio: Literal[0, 1] = 0
+    tag_amueblada: Literal[0, 1] = 0
+    tag_urbanización: Literal[0, 1] = 0
+    tag_calefacción: Literal[0, 1] = 0
+    tag_armarios: Literal[0, 1] = 0
+    tag_reformar: Literal[0, 1] = 0
+    tag_patio: Literal[0, 1] = 0
+    tag_jardín: Literal[0, 1] = 0
+    tag_chalet: Literal[0, 1] = 0
+    tag_balcones: Literal[0, 1] = 0
+    tag_dúplex: Literal[0, 1] = 0
+    tag_portero: Literal[0, 1] = 0
+    tag_electrodomésticos: Literal[0, 1] = 0
+    tag_goya: Literal[0, 1] = 0
+    tag_solo_particulares: Literal[0, 1] = 0
+    tag_ventanales: Literal[0, 1] = 0
+    tag_parcela: Literal[0, 1] = 0
+    tag_abstenerse_agencias: Literal[0, 1] = 0
+    tag_seguridad: Literal[0, 1] = 0
 
 
 class Prediccion(BaseModel):
