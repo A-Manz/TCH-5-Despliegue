@@ -1,8 +1,6 @@
 from typing import Literal
-
 from pydantic import BaseModel, Field
 
-PLANTAS_STR = ["BAJO", "ENTREPLANTA", "NO_APLICA", "DESCONOCIDO"]
 
 ZONAS = Literal[
     "arganzuela",
@@ -182,6 +180,30 @@ BARRIOS = Literal[
     "Águilas",
 ]
 
+PLANTAS = Literal[
+    "-2",
+    "-1",
+    "BAJO",
+    "ENTREPLANTA",
+    "1ª",
+    "2ª",
+    "3ª",
+    "4ª",
+    "5ª",
+    "6ª",
+    "7ª",
+    "8ª",
+    "9ª",
+    "10ª",
+    "11ª",
+    "12ª",
+    "13ª",
+    "14ª",
+    "15ª",
+    "NO_APLICA",
+    "DESCONOCIDO",
+]
+
 
 class Vivienda(BaseModel):
     """DATOS DE ENTRADA."""
@@ -192,11 +214,10 @@ class Vivienda(BaseModel):
     zona: str = Field(description="Zona de Madrid")
     barrio: str = Field(description="Barrio")
     tipo_inmueble: str = Field(description="Tipo de inmueble")
-    planta: str = Field(description=f"Planta: un número o {PLANTAS_STR}")
+    planta: PLANTAS = Field(description="Planta de la vivienda")
     ascensor: Literal["S", "N", "NO_APLICA", "DESCONOCIDO"]
     localizacion: Literal["EXTERIOR", "INTERIOR", "NO_APLICA", "DESCONOCIDO"]
 
-    # Características opcionales del anuncio para completar y ser más preciso con los tags
     terraza: bool = False
     garaje: bool = False
     jardin: bool = False
