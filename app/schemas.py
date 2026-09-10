@@ -214,7 +214,7 @@ class Vivienda(BaseModel):
     zona: str = Field(description="Zona de Madrid")
     barrio: str = Field(description="Barrio")
     tipo_inmueble: str = Field(description="Tipo de inmueble")
-    planta: PLANTAS = Field(description="Planta de la vivienda")
+    planta: str = Field(description="Planta de la vivienda")
     ascensor: Literal["S", "N", "NO_APLICA", "DESCONOCIDO"]
     localizacion: Literal["EXTERIOR", "INTERIOR", "NO_APLICA", "DESCONOCIDO"]
 
