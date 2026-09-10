@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse
+from typing import Literal
 import pandas as pd
 from app import model
 from app.schemas import *
@@ -10,6 +11,7 @@ app = FastAPI(
     version="0.0.1"
 )
 
+### HOME
 @app.get("/")
 def home():
     return {
@@ -28,6 +30,35 @@ def home():
     }
 
 
+### PREDICT GET
+@app.get("/predict", response_model=Prediccion)
+def predict_get(
+    metros: float,
+    habitaciones_limpio: int,
+    baños_limpio: int,
+    zona: ZONAS,
+    barrio: BARRIOS,
+    tipo_inmueble: TIPOS_INMUEBLE,
+    planta_limpio: PLANTAS,
+    ascensor_limpio: Literal["S", "N", "NO_APLICA", "DESCONOCIDO"],
+    localizacion_limpio: Literal["EXTERIOR", "INTERIOR", "NO_APLICA", "DESCONOCIDO"],
+):
+
+    vivienda = Vivienda(
+        metros=metros,
+        habitaciones_limpio=habitaciones_limpio,
+        baños_limpio=baños_limpio,
+        zona=zona,
+        barrio=barrio,
+        tipo_inmueble=tipo_inmueble,
+        planta_limpio=planta_limpio,
+        ascensor_limpio=ascensor_limpio,
+        localizacion_limpio=localizacion_limpio,
+    )
+    return predict(vivienda)
+
+
+### PREDICT POST
 @app.post("/predict", response_model=Prediccion)
 def predict(vivienda: Vivienda):
     X = pd.DataFrame([vivienda.model_dump()])
