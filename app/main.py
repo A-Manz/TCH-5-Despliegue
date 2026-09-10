@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse
-from app import model as ml
+import pandas as pd
+from app import model
 from app.schemas import *
 
 app = FastAPI(
@@ -19,3 +20,11 @@ def landing():
             "/docs": "Documentación"
         }
     }
+
+
+@app.post("/predict", response_model=Prediccion)
+def predict(vivienda: Vivienda):
+    X = pd.DataFrame([vivienda.model_dump()])
+    X = X.reindex(columns=model.COLUMNS, fill_value=0)
+    prediccion = int(model.model.predict(X)[0])
+    return Prediccion(precio_estimado=prediccion)
