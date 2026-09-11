@@ -27,17 +27,16 @@ El servicio está alojado en el plan gratuito de Render. La primera petición pu
 #### Predicción con GET:
 
 1. Accede al siguiente elemento:  
-
-![GET/predict]("img/img-1.png")  
+![GET/predict](img/img-1.png)  
 
 2. Click en "Try it out"
+![Try](img/img-2.png)  
 
-![Try]("img/img-2.png")  
+3. Rellena el formulario con las características y ejecuta el programa.  
+![Formulario](img/img-3.png)
 
-3. Rellena el formulario con las características y ejecuta el programa.
 4. Encuentra tu resultado aquí:
-
-![resultado]("img/img-4.png")  
+![resultado](img/img-4.png)  
 
 
 #### Predicción con POST
